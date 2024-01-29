@@ -7,14 +7,6 @@ description: "Upgrade minor/patch version packages for Node.js project"
 runs:
   using: "composite"
   steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
-    - name: Setup node
-      uses: actions/setup-node@v4
-      with:
-        node-version-file: .nvmrc
-
     - name: Check outdated packages
       shell: "bash"
       run: |

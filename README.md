@@ -26,6 +26,14 @@ jobs:
     name: Upgrade minor/patch version packages
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
       - name: Upgrade minor/patch version packages
         uses: florencea/node-depsup-action@v1
 ```
