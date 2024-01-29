@@ -1,4 +1,4 @@
-name: "Upgrade minor/patch version packages"
+name: "node-depsup-action"
 description: "Upgrade minor/patch version packages"
 runs:
   using: "composite"
