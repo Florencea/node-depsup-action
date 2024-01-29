@@ -8,4 +8,4 @@ runs:
   using: "composite"
   steps:
     - shell: bash
-      run: main ${{ github.actor }}
+      run: ./main ${{ github.actor }}
