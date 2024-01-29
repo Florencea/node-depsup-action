@@ -2,7 +2,8 @@
 set -o errexit
 set -o pipefail
 
-CURRENT_TAG="$(git describe --abbrev=0 --tags)"
+CURRENT_TAG_FULL="$(git describe --abbrev=0 --tags)"
+CURRENT_TAG="$(npx -y semver@latest "$CURRENT_TAG_FULL" -c)"
 NEXT_TAG="$(npx -y semver@latest "$CURRENT_TAG" -i patch)"
 N=${NEXT_TAG//[!0-9]/ }
 A=(${N//\./ })

@@ -41,3 +41,10 @@ jobs:
       - name: Upgrade minor/patch version packages
         uses: florencea/node-depsup-action@v1
 ```
+
+## Development
+
+```sh
+# make new release
+./make-tag
+```
