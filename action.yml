@@ -7,49 +7,5 @@ description: "Upgrade minor/patch version packages for Node.js project"
 runs:
   using: "composite"
   steps:
-    - name: Check outdated packages
-      shell: "bash"
-      run: |
-        {
-          echo 'COMMIT_MSG_BODY<<EOF'
-          npx -y npm-check-updates@latest -p npm -t semver --install never | sed '1,2d; $d' | sed '$ d'
-          echo EOF
-        } >> "$GITHUB_ENV"
-
-    - name: Logging information if needed
-      shell: "bash"
-      if: ${{ env.COMMIT_MSG_BODY != '' }}
-      run: |
-        echo "Upgrage packages"
-        echo ${{ env.COMMIT_MSG_BODY }}
-
-    - name: Logging information if not needed
-      shell: "bash"
-      if: ${{ env.COMMIT_MSG_BODY == '' }}
-      run: |
-        echo "No minor/patch version packages need to upgrade"
-
-    - name: Upgade packages if needed
-      shell: "bash"
-      if: ${{ env.COMMIT_MSG_BODY != '' }}
-      run: |
-        npx -y npm-check-updates@latest -p npm -t semver --install never -u
-
-    - name: Sync lockfile if needed
-      shell: "bash"
-      if: ${{ env.COMMIT_MSG_BODY != '' }}
-      run: |
-        rm -rf node_modules
-        rm -f package-lock.json
-        npm i
-
-    - name: Commit lockfile if needed
-      shell: "bash"
-      if: ${{ env.COMMIT_MSG_BODY != '' }}
-      run: |
-        git config user.name ${{ github.actor }}
-        git config user.email "$(gh api /users/${{ github.actor }} | jq .email -r)"
-        git add package-lock.json
-        git add package.json
-        git commit -m "fix(deps): update all non-major dependencies" -m "${{ env.COMMIT_MSG_BODY }}" -m "by CI script"
-        git push
+    - shell: bash
+      run: main ${{ github.actor }}
