@@ -2,6 +2,7 @@
 
 - This action use [npm-check-updates](https://www.npmjs.com/package/npm-check-updates) to update minor/patch version packages
 - It will auto generate commit messages
+- **_Note: Currently only support project using npm_**
 
 ## Usage
 
