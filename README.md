@@ -1,12 +1,12 @@
 # Upgrade minor/patch version packages for node project
 
 - This action use [npm-check-updates](https://www.npmjs.com/package/npm-check-updates) to update minor/patch version packages
-- It will auto generate commit messages
+- It will update `package.json`, `package-lock.json` and auto generate commit messages
 - **_Note: Currently only support project using npm_**
 
 ## Usage
 
-```yml
+```yaml
 name: Upgrade
 
 on:
@@ -20,26 +20,16 @@ permissions:
   actions: read
   checks: write
 
-env:
-  NODE_ENV: development
-  COMMIT_MSG_BODY: ""
-  GH_TOKEN: ${{ github.token }}
-
 jobs:
   upgrade:
-    name: Upgrade minor/patch version packages
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
-
-      - name: Upgrade minor/patch version packages
-        uses: florencea/node-depsup-action@v1
+          cache: npm
+      - uses: florencea/node-depsup-action@v1
 ```
 
 ## Development
