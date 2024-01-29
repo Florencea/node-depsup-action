@@ -1,0 +1,12 @@
+#! /usr/bin/env bash
+set -o errexit
+set -o pipefail
+
+TAG=$1
+
+if ! [ "$TAG" = "" ]; then
+  # git tag -a -m "Release $TAG" "$TAG"
+  # git push --follow-tags
+else
+  echo "Usage: ./make-tag v1.0.5"
+fi
