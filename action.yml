@@ -7,5 +7,7 @@ description: "Upgrade minor/patch version packages for Node.js project"
 runs:
   using: "composite"
   steps:
-    - shell: bash
-      run: main.sh ${{ github.actor }}
+    - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
+      shell: bash
+    - run: ./main ${{ github.actor }}
+      shell: bash
