@@ -1,5 +1,8 @@
 # Upgrade minor/patch version packages for node project
 
+- This action use [npm-check-updates](https://www.npmjs.com/package/npm-check-updates) to update minor/patch version packages
+- It will auto generate commit messages
+
 ## Usage
 
 ```yml
