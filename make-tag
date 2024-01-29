@@ -2,11 +2,11 @@
 set -o errexit
 set -o pipefail
 
-TAG=$1
+### Check cmd exist
+chkcmd "git"
+chkcmd "npx"
 
-if ! [ "$TAG" = "" ]; then
-  git tag -a -m "Release $TAG" "$TAG"
-  git push --follow-tags
-else
-  echo "Usage: ./make-tag v1.0.5"
-fi
+CURRENT_TAG="$(git describe --abbrev=0 --tags)"
+NEXT_TAG="$(npx -y semver@latest "$CURRENT_TAG" -i patch)"
+git tag -a -m "Release $NEXT_TAG" "$NEXT_TAG"
+git push --follow-tags
