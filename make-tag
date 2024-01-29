@@ -4,5 +4,9 @@ set -o pipefail
 
 CURRENT_TAG="$(git describe --abbrev=0 --tags)"
 NEXT_TAG="$(npx -y semver@latest "$CURRENT_TAG" -i patch)"
+N=${NEXT_TAG//[!0-9]/ }
+A=(${N//\./ })
+MAJOR_TAG=${A[0]}
 git tag -a -m "Release v$NEXT_TAG" "v$NEXT_TAG"
+git tag "v$MAJOR_TAG" "v$NEXT_TAG"
 git push --follow-tags
