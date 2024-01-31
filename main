@@ -9,7 +9,7 @@ if ! [ "$COMMIT_MSG_BODY" = "" ]; then
   printf "\n$COMMIT_MSG_BODY\n\n"
   npx -y npm-check-updates@latest -p npm -t semver --install never --loglevel silent -u
   rm -f package-lock.json
-  NODE_ENV=development npm i --package-lock-only true --loglevel silent
+  NODE_ENV=development npm i --package-lock-only true --ignore-scripts true --loglevel silent
   git config user.name "$GH_ACTOR"
   git config user.email "$(gh api /users/$GH_ACTOR | jq .email -r)"
   git add package-lock.json
