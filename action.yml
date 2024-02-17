@@ -4,6 +4,10 @@ branding:
   color: blue
   icon: refresh-cw
 description: "Upgrade minor/patch version packages for Node.js project"
+inputs:
+  GH_TOKEN:
+    description: Your GitHub token with write permission, you can use 'github.token'
+    required: true
 runs:
   using: "composite"
   steps:
@@ -11,6 +15,6 @@ runs:
       shell: bash
     - run: main
       env:
-        GH_TOKEN: ${{ github.token }}
+        GH_TOKEN: ${{ input.GH_TOKEN }}
         GH_ACTOR: ${{ github.actor }}
       shell: bash
